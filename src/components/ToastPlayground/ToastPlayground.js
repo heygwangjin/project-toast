@@ -51,11 +51,11 @@ function ToastPlayground() {
               id="message"
               className={styles.messageInput}
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyDown={(e) => {
+              onChange={(event) => setMessage(event.target.value)}
+              onKeyDown={(event) => {
                 // Allow Cmd+Enter to submit the form
-                if (e.key === "Enter" && e.metaKey) {
-                  handleCreateToast(e);
+                if (event.key === "Enter" && event.metaKey) {
+                  handleCreateToast(event);
                 }
               }}
             />
@@ -65,19 +65,23 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label}>Variant</div>
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            {VARIANT_OPTIONS.map((v) => (
-              <label key={v} htmlFor={`variant-${v}`}>
-                <input
-                  id={`variant-${v}`}
-                  type="radio"
-                  name="variant"
-                  value={v}
-                  checked={variant === v}
-                  onChange={() => setVariant(v)}
-                />
-                {v}
-              </label>
-            ))}
+            {VARIANT_OPTIONS.map((option) => {
+              const id = `variant-${option}`;
+
+              return (
+                <label key={id} htmlFor={id}>
+                  <input
+                    id={id}
+                    type="radio"
+                    name="variant"
+                    value={option}
+                    checked={option === variant}
+                    onChange={(event) => setVariant(event.target.value)}
+                  />
+                  {option}
+                </label>
+              );
+            })}
           </div>
         </div>
 
