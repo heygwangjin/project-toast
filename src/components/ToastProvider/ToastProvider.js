@@ -5,6 +5,21 @@ export const ToastContext = React.createContext();
 function ToastProvider({ children }) {
   const [toasts, setToasts] = React.useState([]);
 
+  // Hitting the escape key should dismiss all toasts
+  React.useEffect(() => {
+    function handleEscapeKey(event) {
+      if (event.key === "Escape") {
+        setToasts([]);
+      }
+    }
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
+
   function createToast(message, variant) {
     const nextToasts = [
       ...toasts,
