@@ -41,13 +41,13 @@ function ToastProvider({ children }) {
     if (toasts.length === 0) return;
 
     const timeoutId = setTimeout(() => {
-      dismissToast(toasts[0].id);
+      setToasts(toasts.slice(1));
     }, TOAST_TIMEOUT);
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [toasts, dismissToast]);
+  }, [toasts]);
 
   return (
     <ToastContext.Provider value={{ toasts, createToast, dismissToast }}>
