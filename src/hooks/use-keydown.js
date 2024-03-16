@@ -4,7 +4,7 @@ function useKeydown(key, callback) {
   React.useEffect(() => {
     function handleKeydown(event) {
       if (event.key === key) {
-        callback();
+        callback(event);
       }
     }
 
@@ -13,7 +13,7 @@ function useKeydown(key, callback) {
     return () => {
       window.removeEventListener("keydown", handleKeydown);
     };
-  });
+  }, [key, callback]);
 }
 
 export default useKeydown;

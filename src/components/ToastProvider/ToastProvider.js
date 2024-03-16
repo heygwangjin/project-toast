@@ -9,9 +9,9 @@ function ToastProvider({ children }) {
   const [toasts, setToasts] = React.useState([]);
 
   // Hitting the escape key should dismiss all toasts
-  function handleEscape() {
+  const handleEscape = React.useCallback(() => {
     setToasts([]);
-  }
+  }, []);
 
   function createToast(message, variant) {
     const nextToasts = [
